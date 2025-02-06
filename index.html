@@ -1,0 +1,73 @@
+<!-- index.html en la raíz -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/public/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Application title -->
+    <title>Ingeniería Económica | inicio</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/global.css">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="./img/logo.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="components/calculator.html">Calculadora</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="header">
+        <div class="container">
+            <h1>Proyecto de Ingeniería Económica</h1>
+        </div>
+    </header>
+    <main class="container-fluid mt-4">
+        <section class="main-content">
+            <h2 class="text-center text-yellow">Bienvenido</h2>
+            <p class="text-white text-center">Este proyecto tiene como objetivo realizar cálculos financieros relacionados con ingeniería económica.</p>
+            <ul class="list-group list-group-flush mt-3 text-center container">
+                <li class="list-group-item">Interés compuesto</li>
+                <li class="list-group-item">Equivalencia de tasa</li>
+                <li class="list-group-item">Anualidad ordinaria</li>
+                <li class="list-group-item">Valor futuro de anualidad</li>
+                <li class="list-group-item">Anualidad anticipada</li>
+                <li class="list-group-item">Valor futuro de anualidad anticipada</li>
+                <li class="list-group-item">Anualidad deuda diferida</li>
+                <li class="list-group-item">Tabla de amortización</li>
+                <li class="list-group-item">Tabla de capitalización</li>
+            </ul>
+            <div class="text-center mt-4">
+                <button class="btn btn-yellow w-50" onclick="window.location.href='components/calculator.html'">Iniciar</button>
+            </div>
+        </section>
+        <section class="main-content mt-4 mb-4">
+            <h2 class="text-center text-yellow">Autores</h2>
+            <p class="text-white text-center">Los autores de este proyecto son:</p>
+            <ul class="list-group list-group-flush mt-3 text-center container">
+                <li class="list-group-item">Diego Fernández</li>
+                <li class="list-group-item">Marlon Herrera</li>
+                <li class="list-group-item">Danna Capera</li>
+            </ul>
+        </section>
+    </main>
+    <footer class="footer text-yellow fw-bold pb-5 mt-auto">
+        © 2025. Todos los derechos reservados. Diego. Marlon. Danna.
+    </footer>
+</body>
+</html>

@@ -1,0 +1,65 @@
+:root{
+    --white: #F9F9F9;
+    --red: #8C1919;
+    --yellow: #FBDE18;
+    --gray: #373435;
+}
+
+.text-white{
+    color: var(--white);
+}
+
+.text-yellow{
+    color: var(--yellow);
+}
+
+.navbar {
+    background-color: var(--white);
+}
+.navbar-brand img {
+    height: 50px;
+}
+.header {
+    background-color: var(--red);
+    padding: 20px 0;
+    text-align: center;
+}
+.header h1 {
+    color: var(--yellow);
+}
+.main-content {
+    background-color: var(--gray);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+label{
+    color: var(--white);
+}
+
+.btn-yellow{
+    color: var(--yellow);
+    background-color: var(--red);
+    border-color: var(--yellow);
+    font-weight: bold;
+}
+
+.btn-yellow:hover{
+    color: var(--red);
+    background-color: var(--yellow);
+    border-color: var(--red);
+}
+
+.footer {
+    background-color: var(--red);
+    padding:20px 0;
+    text-align: center;
+    min-height: 100%;
+    bottom: 0;
+    position: relative;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/public/favicon.ico" />
+
+    <!-- Application title -->
+    <title>Ingeniería Económica | Calculadora</title>
+    
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../bootstrap-5.3.3-dist/css/bootstrap.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/global.css">
+
+    <script defer src="../js/script.js"></script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../img/logo.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./calculator.html">Calculadora</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="header">
+        <div class="container">
+            <h1>Calculadora de Ingeniería Económica</h1>
+        </div>
+    </header>
+    <main class="container mt-4">
+        <section class="main-content">
+            <h2 class="text-center text-white">Calculadora Financiera</h2>
+            <div class="mb-3 text-white">
+                <label for="tipoCalculo" class="form-label">Selecciona el tipo de cálculo:</label>
+                <select id="tipoCalculo" class="form-select" onchange="mostrarInputs()">
+                    <option value="">Seleccione una opción</option>
+                    <option value="interesCompuesto">Interés Compuesto</option>
+                    <option value="equivalenciaTasa">Equivalencia de Tasa</option>
+                    <option value="anualidadOrdinaria">Anualidad Ordinaria</option>
+                    <option value="valorFuturoAnualidad">Valor Futuro de Anualidad</option>
+                    <option value="anualidadAnticipada">Anualidad Anticipada</option>
+                    <option value="valorFuturoAnualidadAnticipada">Valor Futuro de Anualidad Anticipada</option>
+                    <option value="anualidadDiferida">Anualidad Deuda Diferida</option>
+                    <option value="tablaAmortizacion">Tabla de Amortización</option>
+                    <option value="tablaCapitalizacion">Tabla de Capitalización</option>
+                </select>
+            </div>
+            <div id="formulario" class="mb-3"></div>
+            <button class="btn btn-yellow w-100 mt-4" onclick="calcular()">Calcular</button>
+            <p id="resultado" class="mt-3 text-center text-white"></p>
+        </section>
+    </main>
+    <footer class="footer text-yellow fw-bold pb-5 mt-auto">
+        © 2025. Todos los derechos reservados. Diego. Marlon. Danna.
+    </footer>
+</body>
+</html>
