@@ -44,7 +44,8 @@
             <div class="mb-3 text-white">
                 <label for="tipoCalculo" class="form-label">Selecciona el tipo de cálculo:</label>
                 <select id="tipoCalculo" class="form-select" onchange="mostrarInputs()">
-                    <option value="">Seleccione una opción</option>
+                    <option selected>Seleccione una opción</option>
+                    <option value="interesSimple">Interés Simple</option>
                     <option value="interesCompuesto">Interés Compuesto</option>
                     <option value="equivalenciaTasa">Equivalencia de Tasa</option>
                     <option value="anualidadOrdinaria">Anualidad Ordinaria</option>
@@ -56,9 +57,9 @@
                     <option value="tablaCapitalizacion">Tabla de Capitalización</option>
                 </select>
             </div>
-            <div id="formulario" class="mb-3"></div>
+            <div id="formulario" class="mb-4"></div>
             <button class="btn btn-yellow w-100 mt-4" onclick="calcular()">Calcular</button>
-            <p id="resultado" class="mt-3 text-center text-white"></p>
+            <div id="resultado" class="text-white col-auto mt-5"></div>
         </section>
     </main>
     <footer class="footer text-yellow fw-bold pb-5 mt-auto">

@@ -6,85 +6,110 @@ function mostrarInputs() {
     const tipo = document.getElementById("tipoCalculo").value;
     const formulario = document.getElementById("formulario");
     formulario.innerHTML = "";
+    document.getElementById('resultado').innerHTML = '';
     
     if (tipo === "interesCompuesto") {
         formulario.innerHTML = `
             <label for="capital">Capital inicial:</label>
             <input type="number" id="capital">
             <label for="tasa">Tasa de interés (%):</label>
-            <input type="number" id="tasa">
-            <label for="periodos">Número de periodos:</label>
-            <input type="number" id="periodos">
+            <input class="porcentajes" type="number" id="tasa">
+            <label for="periodos">Tiempo en años:</label>
+            <input class="porcentajes" type="number" id="periodos">
+            <label for="periodos">Frecuencia de Capitalización:</label>
+            <select class="porcentajes" id="capitalizacion">
+                    <option value="365" selected>Diaria</option>
+                    <option value="52">Semanal</option>
+                    <option value="12">Mensual</option>
+                    <option value="4">Trimestral</option>
+                    <option value="2">Semestral</option>
+                    <option value="1">Anual</option>
+            </select>
         `;
     } else if (tipo === "equivalenciaTasa") {
         formulario.innerHTML = `
             <label for="tasaAnual">Tasa anual (%):</label>
             <input type="number" id="tasaAnual">
             <label for="periodosTasa">Número de periodos por año:</label>
-            <input type="number" id="periodosTasa">
+            <input class="porcentajes" type="number" id="periodosTasa">
         `;
     } else if (tipo === "anualidadOrdinaria") {
         formulario.innerHTML = `
             <label for="capitalAnualidad">Valor presente:</label>
             <input type="number" id="capitalAnualidad">
             <label for="tasaAnualidad">Tasa de interés (%):</label>
-            <input type="number" id="tasaAnualidad">
+            <input class="porcentajes" type="number" id="tasaAnualidad">
             <label for="periodosAnualidad">Número de periodos:</label>
-            <input type="number" id="periodosAnualidad">
+            <input class="porcentajes" type="number" id="periodosAnualidad">
         `;
     } else if (tipo === "valorFuturoAnualidad") {
         formulario.innerHTML = `
             <label for="capitalFuturoAnualidad">Valor presente:</label>
             <input type="number" id="capitalFuturoAnualidad">
             <label for="tasaFuturoAnualidad">Tasa de interés (%):</label>
-            <input type="number" id="tasaFuturoAnualidad">
+            <inputclass="porcentajes" type="number" id="tasaFuturoAnualidad">
             <label for="periodosFuturoAnualidad">Número de periodos:</label>
-            <input type="number" id="periodosFuturoAnualidad">
+            <input class="porcentajes" type="number" id="periodosFuturoAnualidad">
         `;
     } else if (tipo === "anualidadAnticipada") {
         formulario.innerHTML = `
             <label for="capitalAnticipada">Valor presente:</label>
             <input type="number" id="capitalAnticipada">
             <label for="tasaAnticipada">Tasa de interés (%):</label>
-            <input type="number" id="tasaAnticipada">
+            <input class="porcentajes" type="number" id="tasaAnticipada">
             <label for="periodosAnticipada">Número de periodos:</label>
-            <input type="number" id="periodosAnticipada">
+            <input class="porcentajes" type="number" id="periodosAnticipada">
         `;
     } else if (tipo === "valorFuturoAnualidadAnticipada") {
         formulario.innerHTML = `
             <label for="capitalFuturoAnticipada">Valor presente:</label>
             <input type="number" id="capitalFuturoAnticipada">
             <label for="tasaFuturoAnticipada">Tasa de interés (%):</label>
-            <input type="number" id="tasaFuturoAnticipada">
+            <input class="porcentajes" type="number" id="tasaFuturoAnticipada">
             <label for="periodosFuturoAnticipada">Número de periodos:</label>
-            <input type="number" id="periodosFuturoAnticipada">
+            <input class="porcentajes" type="number" id="periodosFuturoAnticipada">
         `;
     } else if (tipo === "anualidadDiferida") {
         formulario.innerHTML = `
             <label for="capitalDiferida">Valor presente:</label>
             <input type="number" id="capitalDiferida">
             <label for="tasaDiferida">Tasa de interés (%):</label>
-            <input type="number" id="tasaDiferida">
+            <input class="porcentajes" type="number" id="tasaDiferida">
             <label for="periodosDiferida">Número de periodos:</label>
-            <input type="number" id="periodosDiferida">
+            <input class="porcentajes" type="number" id="periodosDiferida">
         `;
     } else if (tipo === "tablaAmortizacion") {
         formulario.innerHTML = `
             <label for="capitalAmortizacion">Capital inicial:</label>
             <input type="number" id="capitalAmortizacion">
             <label for="tasaAmortizacion">Tasa de interés (%):</label>
-            <input type="number" id="tasaAmortizacion">
+            <input class="porcentajes" type="number" id="tasaAmortizacion">
             <label for="periodosAmortizacion">Número de periodos:</label>
-            <input type="number" id="periodosAmortizacion">
+            <input class="porcentajes" type="number" id="periodosAmortizacion">
         `;
     } else if (tipo === "tablaCapitalizacion") {
         formulario.innerHTML = `
             <label for="capitalCapitalizacion">Capital inicial:</label>
             <input type="number" id="capitalCapitalizacion">
             <label for="tasaCapitalizacion">Tasa de interés (%):</label>
-            <input type="number" id="tasaCapitalizacion">
+            <input class="porcentajes" type="number" id="tasaCapitalizacion">
             <label for="periodosCapitalizacion">Número de periodos:</label>
-            <input type="number" id="periodosCapitalizacion">
+            <inpu class="porcentajes"t type="number" id="periodosCapitalizacion">
+        `;
+    } else if (tipo === "interesSimple") {
+        formulario.innerHTML = `
+            <label for="capitalSimple">Capital inicial:</label>
+            <input type="number" id="capitalSimple">
+            <label for="tasaSimple">Tasa de interés anual (%):</label>
+            <input class="porcentajes" type="number" id="tasaSimple">
+            <label for="periodosSimple">Periodos:</label>
+            <input class="porcentajes" type="number" id="periodosSimple">
+            <select class="porcentajes" id="tiempo">
+                    <option value="365" selected>Dias</option>
+                    <option value="12">Meses</option>
+                    <option value="1">Años</option>
+            </select>
+ 
         `;
     }
 }
@@ -110,6 +135,8 @@ function calcular() {
         calcularTablaAmortizacion();
     } else if (tipo === "tablaCapitalizacion") {
         calcularTablaCapitalizacion();
+    } else if (tipo === "interesSimple") {
+        calcularInteresSimple();
     }
 }
 
@@ -117,14 +144,29 @@ function calcularInteresCompuesto() {
     let capital = parseFloat(document.getElementById("capital").value);
     let tasa = parseFloat(document.getElementById("tasa").value) / 100;
     let periodos = parseInt(document.getElementById("periodos").value);
+    let capitalizacion = parseInt(document.getElementById("capitalizacion").value);
+    if (isNaN(capital) || isNaN(tasa) || isNaN(periodos)) {
+        document.getElementById("resultado").textContent = "Por favor, ingrese valores válidos.";
+        return;
+    }
+    
+    let montoFinal = capital * Math.pow(1 + tasa/capitalizacion, periodos*capitalizacion);
+    document.getElementById("resultado").textContent = `Monto final: ${montoFinal.toFixed(2)}`;
+}
+
+function calcularInteresSimple() {
+    let capital = parseFloat(document.getElementById("capitalSimple").value);
+    let tasa = parseFloat(document.getElementById("tasaSimple").value) / 100;
+    let periodos = parseInt(document.getElementById("periodosSimple").value);
     
     if (isNaN(capital) || isNaN(tasa) || isNaN(periodos)) {
         document.getElementById("resultado").textContent = "Por favor, ingrese valores válidos.";
         return;
     }
     
-    let montoFinal = capital * Math.pow(1 + tasa, periodos);
-    document.getElementById("resultado").textContent = `Monto final: ${montoFinal.toFixed(2)}`;
+    let interesSimple = capital * tasa * periodos/document.getElementById("tiempo").value;
+    let montoFinal = capital + interesSimple;
+    document.getElementById("resultado").textContent = `Interés simple: ${interesSimple.toFixed(2)}, Monto final: ${montoFinal.toFixed(2)}`;
 }
 
 function calcularEquivalenciaTasa() {
@@ -221,37 +263,123 @@ function calcularTablaAmortizacion() {
     }
     
     let cuota = capital * (tasa / (1 - Math.pow(1 + tasa, -periodos)));
-    let tabla = "";
-    
-    for (let i = 1; i <= periodos; i++) {
-        let interes = capital * tasa;
-        let abono = cuota - interes;
-        capital -= abono;
-        
+let tabla = `
+    <div class='table-responsive'>
+        <table class='table table-striped table-dark table-hover rounded'>
+            <thead>
+                <tr>
+                    <th>Periodo</th>
+                    <th>Saldo</th>
+                    <th>Interés</th>
+                    <th>Cuota</th>
+                    <th>Amortización</th>
+                </tr>
+            </thead>
+            <tbody>
+`;
+
+
+for (let i = 1; i <= periodos; i++) {
+    if(i==1){
         tabla += `
-            <p>Periodo ${i}: Cuota = ${cuota.toFixed(2)}, Interés = ${interes.toFixed(2)}, Abono = ${abono.toFixed(2)}, Saldo = ${capital.toFixed(2)}</p>
-        `;
+        <tr>
+            <td>${i-1}</td>
+            <td>${capital.toFixed(2)}</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+        </tr>
+    `;
     }
+     
     
-    document.getElementById("resultado").innerHTML = tabla;
+
+    let interes = capital * tasa;
+    let abono = cuota - interes;
+    capital -= abono;
+
+    tabla += `
+        <tr>
+        
+            <td>${i}</td>
+            <td>${capital.toFixed(2)}</td>
+            <td>${interes.toFixed(2)}</td>
+            <td>${cuota.toFixed(2)}</td>
+            <td>${abono.toFixed(2)}</td>
+        </tr>
+    `;
+}
+
+tabla += `
+            </tbody>
+        </table>
+    </div>
+`;
+
+document.getElementById("resultado").innerHTML = tabla;
 }
 
 function calcularTablaCapitalizacion() {
-    let capital = parseFloat(document.getElementById("capitalCapitalizacion").value);
+    let saldo = parseFloat(document.getElementById("capitalCapitalizacion").value);
     let tasa = parseFloat(document.getElementById("tasaCapitalizacion").value) / 100;
     let periodos = parseInt(document.getElementById("periodosCapitalizacion").value);
     
-    if (isNaN(capital) || isNaN(tasa) || isNaN(periodos)) {
+    if (isNaN(saldo) || isNaN(tasa) || isNaN(periodos)) {
         document.getElementById("resultado").textContent = "Por favor, ingrese valores válidos.";
         return;
     }
 
-    let tabla = `Capital inicial: ${capital}<br><br>`;
+    let tabla = `
+    <div class='table-responsive'>
+        <table class='table table-striped table-dark table-hover rounded'>
+            <thead>
+                <tr>
+                    <th>Periodo</th>
+                    <th>Saldo</th>
+                    <th>Interés</th>
+                    <th>Cuota</th>
+                    <th>Incremento</th>
+                </tr>
+            </thead>
+            <tbody>
+`;
+    let incremento = 0;
+    let interes = 0;
+    let cuota = saldo;
+    for (let i = 1; i < periodos; i++) {
+        if(i==1){
+            tabla += `
+            <tr>
+                <td>${i}</td>
+                <td>${saldo.toFixed(2)}</td>
+                <td>-</td>
+                <td>${saldo.toFixed(2)}</td>
+                <td>${saldo.toFixed(2)}</td>
+            </tr>
+        `;
+        }
+        interes = saldo * tasa;
+        incremento = cuota+interes;
+        saldo += incremento;
+        tabla += `
+        <tr>
+        
+            <td>${i+1}</td>
+            <td>${saldo.toFixed(2)}</td>
+            <td>${interes.toFixed(2)}</td>
+            <td>${cuota.toFixed(2)}</td>
+            <td>${incremento.toFixed(2)}</td>
+        </tr>
+    `;
     
-    for (let i = 1; i <= periodos; i++) {
-        capital += capital * tasa;
-        tabla += `Periodo ${i}: ${capital.toFixed(2)}<br>`;
-    }
-    
-    document.getElementById("resultado").innerHTML = tabla;
+}
+
+tabla += `
+            </tbody>
+        </table>
+    </div>
+`;
+
+document.getElementById("resultado").innerHTML = tabla;
+
 }
