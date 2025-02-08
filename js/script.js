@@ -28,10 +28,15 @@ function mostrarInputs() {
         `;
     } else if (tipo === "equivalenciaTasa") {
         formulario.innerHTML = `
-            <label for="tasaAnual">Tasa anual (%):</label>
-            <input type="number" id="tasaAnual">
-            <label for="periodosTasa">Número de periodos por año:</label>
-            <input class="porcentajes" type="number" id="periodosTasa">
+            <label for="tasaBase">Tasa base (%):</label>
+            <input type="number" id="tasaBase">
+            <label for="tipoTasa">Tipo de tasa:</label>
+            <select id="tipoTasa">
+                <option value="NA">Nominal Anual (NA)</option>
+                <option value="NM">Nominal Mensual (NM)</option>
+                <option value="EA">Efectiva Anual (EA)</option>
+                <option value="EM">Efectiva Mensual (EM)</option>
+            </select>
         `;
     } else if (tipo === "anualidadOrdinaria") {
         formulario.innerHTML = `
@@ -42,12 +47,12 @@ function mostrarInputs() {
             <label for="periodosAnualidad">Número de periodos:</label>
             <input class="porcentajes" type="number" id="periodosAnualidad">
         `;
-    } else if (tipo === "valorFuturoAnualidad") {
+    }else if (tipo === "valorFuturoAnualidad") {
         formulario.innerHTML = `
             <label for="capitalFuturoAnualidad">Valor presente:</label>
             <input type="number" id="capitalFuturoAnualidad">
             <label for="tasaFuturoAnualidad">Tasa de interés (%):</label>
-            <inputclass="porcentajes" type="number" id="tasaFuturoAnualidad">
+            <input class="porcentajes" type="number" id="tasaFuturoAnualidad">
             <label for="periodosFuturoAnualidad">Número de periodos:</label>
             <input class="porcentajes" type="number" id="periodosFuturoAnualidad">
         `;
@@ -75,10 +80,12 @@ function mostrarInputs() {
             <input type="number" id="capitalDiferida">
             <label for="tasaDiferida">Tasa de interés (%):</label>
             <input class="porcentajes" type="number" id="tasaDiferida">
-            <label for="periodosDiferida">Número de periodos:</label>
+            <label for="periodosDiferida">Número de periodos de pago:</label>
             <input class="porcentajes" type="number" id="periodosDiferida">
+            <label for="diferimiento">Diferimiento (número de periodos):</label>
+            <input class="porcentajes" type="number" id="diferimiento">
         `;
-    } else if (tipo === "tablaAmortizacion") {
+    }else if (tipo === "tablaAmortizacion") {
         formulario.innerHTML = `
             <label for="capitalAmortizacion">Capital inicial:</label>
             <input type="number" id="capitalAmortizacion">
@@ -94,7 +101,7 @@ function mostrarInputs() {
             <label for="tasaCapitalizacion">Tasa de interés (%):</label>
             <input class="porcentajes" type="number" id="tasaCapitalizacion">
             <label for="periodosCapitalizacion">Número de periodos:</label>
-            <inpu class="porcentajes"t type="number" id="periodosCapitalizacion">
+            <input class="porcentajes" type="number" id="periodosCapitalizacion">
         `;
     } else if (tipo === "interesSimple") {
         formulario.innerHTML = `
@@ -170,29 +177,66 @@ function calcularInteresSimple() {
 }
 
 function calcularEquivalenciaTasa() {
-    let tasaAnual = parseFloat(document.getElementById("tasaAnual").value) / 100;
-    let periodosTasa = parseInt(document.getElementById("periodosTasa").value);
-    
-    if (isNaN(tasaAnual) || isNaN(periodosTasa)) {
-        document.getElementById("resultado").textContent = "Por favor, ingrese valores válidos.";
+    let tasaBase = parseFloat(document.getElementById("tasaBase").value) / 100;
+    let tipoTasa = document.getElementById("tipoTasa").value;
+
+    if (isNaN(tasaBase)) {
+        document.getElementById("resultado").textContent = "Por favor, ingrese una tasa válida.";
         return;
     }
-    
-    let tasaEquivalente = Math.pow(1 + tasaAnual, 1 / periodosTasa) - 1;
-    document.getElementById("resultado").textContent = `Tasa equivalente: ${(tasaEquivalente * 100).toFixed(2)}%`;
+
+    let tasaEA, tasaEM, tasaNA, tasaNM;
+
+    if (tipoTasa === "NA") {
+        tasaNA = tasaBase * 100;
+        tasaNM = (tasaBase / 12) * 100;
+        tasaEA = (Math.pow(1 + tasaBase / 12, 12) - 1) * 100;
+        tasaEM = (Math.pow(1 + tasaBase / 12, 1) - 1) * 100;
+    } else if (tipoTasa === "NM") {
+        tasaNA = (tasaBase * 12) * 100;
+        tasaNM = tasaBase * 100;
+        tasaEA = (Math.pow(1 + tasaBase, 12) - 1) * 100;
+        tasaEM = (Math.pow(1 + tasaBase, 1) - 1) * 100;
+    } else if (tipoTasa === "EA") {
+        tasaNA = (Math.pow(1 + tasaBase, 1 / 12) - 1) * 12 * 100;
+        tasaNM = (Math.pow(1 + tasaBase, 1 / 12) - 1) * 100;
+        tasaEA = tasaBase * 100;
+        tasaEM = (Math.pow(1 + tasaBase, 1 / 12) - 1) * 100;
+    } else if (tipoTasa === "EM") {
+        tasaNA = (Math.pow(1 + tasaBase, 12) - 1) * 100;
+        tasaNM = (Math.pow(1 + tasaBase, 1) - 1) * 100;
+        tasaEA = (Math.pow(1 + tasaBase, 12) - 1) * 100;
+        tasaEM = tasaBase * 100;
+    }
+
+    document.getElementById("resultado").innerHTML = `
+        <div class="resultado-tasas">
+            <div class="tasa-box"><b>EA</b><br>${tasaEA.toFixed(2)}%</div>
+            <div class="tasa-box"><b>NA</b><br>${tasaNA.toFixed(2)}%</div>
+            <div class="tasa-box"><b>NM</b><br>${tasaNM.toFixed(2)}%</div>
+            <div class="tasa-box"><b>EM</b><br>${tasaEM.toFixed(2)}%</div>
+        </div>
+    `;
 }
 
 function calcularAnualidadOrdinaria() {
     let capital = parseFloat(document.getElementById("capitalAnualidad").value);
     let tasa = parseFloat(document.getElementById("tasaAnualidad").value) / 100;
     let periodos = parseInt(document.getElementById("periodosAnualidad").value);
-    
-    if (isNaN(capital) || isNaN(tasa) || isNaN(periodos)) {
+
+    if (isNaN(capital) || isNaN(tasa) || isNaN(periodos) || periodos <= 0) {
         document.getElementById("resultado").textContent = "Por favor, ingrese valores válidos.";
         return;
     }
-    
-    let anualidad = capital * (tasa / (1 - Math.pow(1 + tasa, -periodos)));
+
+    let anualidad;
+
+    if (tasa === 0) {
+        anualidad = capital / periodos;
+    } else {
+        anualidad = capital * (tasa / (1 - Math.pow(1 + tasa, -periodos)));
+    }
+
     document.getElementById("resultado").textContent = `Valor de la anualidad: ${anualidad.toFixed(2)}`;
 }
 
@@ -209,19 +253,20 @@ function calcularValorFuturoAnualidad() {
     let valorFuturo = capital * (Math.pow(1 + tasa, periodos) - 1) / tasa;
     document.getElementById("resultado").textContent = `Valor futuro: ${valorFuturo.toFixed(2)}`;
 }
-
 function calcularAnualidadAnticipada() {
     let capital = parseFloat(document.getElementById("capitalAnticipada").value);
-    let tasa = parseFloat(document.getElementById("tasaAnticipada").value) / 100;
+    let tasaAnual = parseFloat(document.getElementById("tasaAnticipada").value) / 100;
     let periodos = parseInt(document.getElementById("periodosAnticipada").value);
     
-    if (isNaN(capital) || isNaN(tasa) || isNaN(periodos)) {
+    if (isNaN(capital) || isNaN(tasaAnual) || isNaN(periodos) || periodos <= 0) {
         document.getElementById("resultado").textContent = "Por favor, ingrese valores válidos.";
         return;
     }
-    
-    let anualidadAnticipada = capital * (tasa / (1 - Math.pow(1 + tasa, -periodos))) * (1 + tasa);
-    document.getElementById("resultado").textContent = `Valor de la anualidad anticipada: ${anualidadAnticipada.toFixed(2)}`;
+
+    // Fórmula corregida para calcular el valor presente de una anualidad anticipada
+    let valorPresente = capital * ((1 - Math.pow(1 + tasaAnual, -periodos)) / tasaAnual) * (1 + tasaAnual);
+
+    document.getElementById("resultado").textContent = `Valor presente de la anualidad anticipada: ${valorPresente.toFixed(2)}`;
 }
 
 function calcularValorFuturoAnualidadAnticipada() {
@@ -241,15 +286,17 @@ function calcularValorFuturoAnualidadAnticipada() {
 function calcularAnualidadDiferida() {
     let capital = parseFloat(document.getElementById("capitalDiferida").value);
     let tasa = parseFloat(document.getElementById("tasaDiferida").value) / 100;
-    let periodos = parseInt(document.getElementById("periodosDiferida").value);
-    
-    if (isNaN(capital) || isNaN(tasa) || isNaN(periodos)) {
+    let numPagos = parseInt(document.getElementById("periodosDiferida").value);
+    let diferimiento = parseInt(document.getElementById("diferimiento").value);
+
+    if (isNaN(capital) || isNaN(tasa) || isNaN(numPagos) || isNaN(diferimiento) || numPagos <= 0) {
         document.getElementById("resultado").textContent = "Por favor, ingrese valores válidos.";
         return;
     }
-    
-    let anualidadDiferida = capital * (tasa / (1 - Math.pow(1 + tasa, -periodos))) * Math.pow(1 + tasa, -periodos);
-    document.getElementById("resultado").textContent = `Valor de la anualidad diferida: ${anualidadDiferida.toFixed(2)}`;
+
+    let valorPresente = capital * ((1 - Math.pow(1 + tasa, -numPagos)) / tasa) * Math.pow(1 + tasa, -diferimiento);
+
+    document.getElementById("resultado").textContent = `Valor presente de la deuda diferida: ${valorPresente.toFixed(2)}`;
 }
 
 function calcularTablaAmortizacion() {
